@@ -55,10 +55,18 @@ agent = Agent(
     # model=OpenAI(id="gpt-4o-mini"),
     model=Ollama(id="llama3.2"),
     tools=[YFinanceTools(stock_price=True)],
-    instructions=""" Return a JSON object with a single key 'answer' containing the response.
-    Do not include any additional text or markdown and clean json without any line break characters.
-    If the response is not a valid JSON object, return an error message.
-    If asked for more than one stock price, return it as an array of objects like "answer": [{"Stock 1": 229.35}, {"Stock 2": 229.35}]
+    instructions=""" 
+    You must always respond with a valid and clean JSON object containing a single key called "answer".
+
+    The value of "answer" must be an array of objects, each using the stock code as the key and the corresponding price as the value, for example:
+
+    {"answer":[{"AAPL":229.35},{"PETR4":129.98}]}.
+
+    Always use only the stock code (e.g., "AAPL", "PETR4") as the key, and only the price as a numerical value.
+
+    Do not include any additional text, markdown, explanations, or line break characters—return only the compact JSON response on a single line.
+
+    If the answer cannot be provided in this format, respond with: {"error":"Invalid JSON format requested"}.
     """,
     markdown=False,
 )
