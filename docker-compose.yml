@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  agno-app:
+    # Set OLLAMA_HOST for Ollama connection (equivalent to docker run -e)
+    # The variable will be available inside the container at startup.
+    # services:
+    #   agno-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    env_file:
+      - .env
+    # Optional: mount the source code so you can edit without rebuilding
+    volumes:
+      - .:/app
+      - /app/__pycache__
+      - /app/.venv
+    # Restart policy (optional)
+    # restart: unless-stopped
