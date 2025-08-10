@@ -48,7 +48,7 @@ curl -X POST http://localhost:8000/query \
 
 A resposta será um JSON limpo, por exemplo:
 ```json
-{ "answer": "229.35" }
+{ "answer": [{"AAPL":229.35}] }
 ```
 
 Se o modelo LLM retornar um objeto de erro, a API encaminhará o código de status HTTP e a mensagem apropriados.
